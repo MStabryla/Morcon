@@ -1,0 +1,6 @@
+@ASPVue_HostAddress = http://localhost:4000; https://localhost:4001
+
+GET {{ASPVue_HostAddress}}/api/data/
+Accept: application/json
+
+###
