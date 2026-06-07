@@ -2,6 +2,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Rewrite;
 using VueCliMiddleware;
 using Microsoft.AspNetCore.HttpOverrides;
+using Morcon.Services;
 
 // BUILDER SECTION
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,8 @@ if (!string.IsNullOrEmpty(applicationUrl))
 builder.Services.AddOpenApi();
 
 builder.Services.AddControllers();
+
+builder.Services.AddSignalR();
 
 //BUILD SECTION
 var app = builder.Build();
@@ -86,5 +89,7 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"),
     }
 );
 
+//MAP Websocket connection
+app.MapHub<MorconHub>("/api/ws");
 
 app.Run();
