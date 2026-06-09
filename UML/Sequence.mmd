@@ -1,0 +1,16 @@
+---
+id: 9943abc0-0c96-4168-9990-fe4111cfb09d
+---
+
+sequenceDiagram
+    participant par2@{ "type" : "database" } as Db
+    participant par1 as App
+    participant par4@{ "type" : "control" } as Hub
+    participant par3@{ "type" : "boundary" } as ClientApp
+    par3->>par4: starting message
+    par4->>par1: redirecting message
+    par4->>par3: broadcasting message
+    par1->>par2: requesting data
+    par2->>par1: returning data
+    par1->>par4: broadcast data order
+    par4->>par3: broadcasting data

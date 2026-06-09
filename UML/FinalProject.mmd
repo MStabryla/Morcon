@@ -1,0 +1,20 @@
+---
+title: Flowchart for Morcon System
+---
+flowchart TB
+    VueView["Client's Interface"]
+    WebSocket(("Real-Time Communication Server"))
+    AppController["Controller ASP.NET App"]
+    Model["Communication History Data"]
+    Fsharp[/"Communication F# Module"/]
+    DB[("SQLite Database")]
+    VueView -- View Request --> AppController
+    VueView -- Creating connection for real-time data --> WebSocket
+    WebSocket -- Refresh Real-Time data --> VueView
+    AppController -- reading ORP Model --> Model
+    Model -- storing data in database --> DB
+    Fsharp -- storing data from devices --> Model
+    Fsharp -- triggering message event--> WebSocket
+    AppController -- using F# module --> Fsharp
+
+

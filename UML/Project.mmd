@@ -1,0 +1,19 @@
+---
+title: Basic Technical Framework for Morcon Project
+---
+flowchart TB
+    view["View Vue.js App"]
+    ws(("WebSocket Server"))
+    con["Controller ASP.NET App"]
+    model["Entity Framework Model"]
+    fs[/"F# Library"/]
+    db[("SQLite Database")]
+    view -- user request --> con
+    view -- connecting --> ws
+    ws -- sending message--> view
+    con -- reading ORP model --> model
+    model -- reading DB data--> db
+    con -- triggering message event--> ws
+    con -- using F# module --> fs
+
+

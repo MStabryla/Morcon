@@ -1,0 +1,33 @@
+classDiagram
+    class MorconCom {
+      #List~Addr~ addressers
+      +long Id
+      +DateTime Timestamp
+      +getNextRecipient()
+      +addNextRecipient(Addr id)
+      *Serialize()
+    }
+    <<Abstract>> MorconCom
+    class JsonCom {
+        +Serialize()
+        -Object data
+    }
+    class TextCom {
+        +Serialize()
+        -String text
+    }
+    class ByteArrayCom {
+        +Serialize()
+        -byte[] data
+    }
+    MorconCom <|-- JsonCom
+    MorconCom <|-- TextCom
+    MorconCom <|-- ByteArrayCom
+
+    class Addr{
+        +long Id
+        +String Name
+        +int Priority
+    }
+
+    MorconCom "1" *-- "many" Addr

@@ -1,0 +1,20 @@
+stateDiagram-v2
+    state "Broadcasting" as br
+    state "Communicating" as cm
+    state "Client Communication" as client {
+        state "Receiving" as rc
+        state "Returning" as rt
+        [*] --> rc
+        rc --> rt
+        rt --> [*]
+    }
+    
+    state cc <<choice>>
+
+    [*] --> br
+    br --> cc
+    cc --> cm: clients > 0
+    cm --> client
+    client --> br
+    cc --> [*]: clients == 0
+
