@@ -94,11 +94,7 @@ module DeviceUDP =
                     printfn "[ERROR]: UDP listener error %A" ex
                     return! loop ()
             }
-            try
-                loop ()
-            finally
-                printfn $"[DEBUG]:Listening stopped!"
-                // sub.Dispose()
+            loop()
             
 
         member _.Shutdown() =

@@ -17,7 +17,7 @@ module MorconConTest =
         // (nameBytes.Concat (bytes.Concat deviceBytes)).ToArray()
         bytes.Concat (deviceBytes.Concat nameBytes)
 
-    let serverPort = 3478
+    let serverPort = 4388
     let serverString = $"127.0.0.1:{serverPort}"
     let serverEndpoint = IPEndPoint.Parse serverString
     let client = new UdpClient()

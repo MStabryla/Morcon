@@ -21,11 +21,16 @@ if (!string.IsNullOrEmpty(applicationUrl))
     builder.WebHost.UseUrls([.. applicationUrl.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(u => u.Trim())]);
 }
 
+builder.Logging.AddConsole();
+
+builder.Services.AddHostedService<MorconUDPService>();
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddControllers();
 
 builder.Services.AddSignalR();
+
 
 //BUILD SECTION
 var app = builder.Build();
