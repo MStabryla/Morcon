@@ -6,7 +6,7 @@ open MorconConLib
 
 module MorconServerTest =
     let MessageReceived(mess: Mess) =
-        printfn $"[{mess.DeviceData.id}:{mess.DeviceData.name}] {mess.Message}"
+        printfn "%s" (string mess)
 
     [<EntryPoint>]
     let main _argv =

@@ -16,8 +16,6 @@ module MorconConTest =
         let nameBytes = Encoding.ASCII.GetBytes(device.name)
         // (nameBytes.Concat (bytes.Concat deviceBytes)).ToArray()
         bytes.Concat (deviceBytes.Concat nameBytes)
-        
-
 
     let serverPort = 3478
     let serverString = $"127.0.0.1:{serverPort}"
@@ -33,16 +31,11 @@ module MorconConTest =
     [<EntryPoint>]
     let main _Argv =
 
-        let deviceBytes = getDeviceByteArray(device)
-        let getMessageBytes(message: string) =
-            let mesBytes = Encoding.ASCII.GetBytes(message)
-            (deviceBytes.Concat mesBytes).ToArray()
-
         for i = 1 to 10 do
-            let messageByteArr = getMessageBytes $"Test{i}"
-            let result = client.Send(messageByteArr,messageByteArr.Length,serverEndpoint)
+            let messageByteArr = (Mess.Serialize ($"Test{i}",device)).ToArray()
+            let result = client.Send(messageByteArr, messageByteArr.Length, serverEndpoint)
             if result <> messageByteArr.Length then
-                printfn $"something{result}"
+                printfn $"[ERROR] Weird result {result}"
             else
                 printfn $"Message {i} send"
             Task.Delay(TimeSpan.FromSeconds 1.0).Wait()
