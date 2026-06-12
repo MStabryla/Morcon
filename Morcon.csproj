@@ -16,4 +16,4 @@
     <ProjectReference Include="Modules\MorconConLib\MorconConLib.fsproj" />
   </ItemGroup>
 
-</Project>
+<ItemGroup><Compile Include="Modules\MorconConTest\Program.fs" /></ItemGroup></Project>

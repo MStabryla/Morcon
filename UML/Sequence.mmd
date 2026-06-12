@@ -3,14 +3,24 @@ id: 9943abc0-0c96-4168-9990-fe4111cfb09d
 ---
 
 sequenceDiagram
-    participant par2@{ "type" : "database" } as Db
-    participant par1 as App
-    participant par4@{ "type" : "control" } as Hub
-    participant par3@{ "type" : "boundary" } as ClientApp
-    par3->>par4: starting message
-    par4->>par1: redirecting message
-    par4->>par3: broadcasting message
-    par1->>par2: requesting data
-    par2->>par1: returning data
-    par1->>par4: broadcast data order
-    par4->>par3: broadcasting data
+    actor client as VueApp
+    participant ws@{ "type" : "control" } as WebSocketHub
+    participant db@{ "type" : "database" } as Db
+    participant app as ASP.NET App
+    participant fs@{ "type" : "control" } as FSharpModule
+    participant rmd@{ "type" : "boundary" } as RemoteDevice
+
+    client ->> app: Request Data
+    app ->> db: Read Data
+    app ->> client: Return Data
+    client ->> ws: Establish Connection
+    loop Device Listening
+        rmd ->> fs: Device UDP Request
+        fs ->> app: Call Handler Service
+        app ->> db: Log Device Record
+        app ->> ws: Trigger data update event
+        ws ->> client: Send data
+    end
+    
+    
+

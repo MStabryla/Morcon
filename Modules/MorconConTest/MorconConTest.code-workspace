@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "../MorconConLib"
+		},
+		{
+			"path": "../MorconConSerTest"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"Morcon"
+		]
+	}
+}

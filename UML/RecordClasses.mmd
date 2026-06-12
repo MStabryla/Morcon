@@ -1,0 +1,44 @@
+classDiagram
+    class DeviceType {
+        <<Enumeration>>
+        TEMP_SENSOR,
+        HUM_SENSOR,
+        WIND_SENSOR,
+        ALARM,
+        MOV_DETECTOR
+    }
+    class MessageType {
+        <<Enumeration>>
+        JSON, TEXT, BINARY
+    }
+    class Device {
+        +long Id,
+        +string Name,
+        +DeviceType Type,
+
+        +List~DeviceMessage~ Messages
+    }
+    class DeviceMessage {
+        +long Id
+        +MessageType Type,
+        +long byteSize,
+        +DateTime Timestamp
+
+        +Device Device
+    }
+
+    class MessageSessions {
+        +long Id
+        +DateTime SessionStart
+        +DateTime SessionEnd
+
+        +Device Device
+        +List~DeviceMessage~ Messages
+    }
+
+    Device o-- DeviceMessage
+    MessageSessions o-- DeviceMessage
+    DeviceMessage *-- Device
+
+    DeviceType ..|> Device
+    MessageType ..|> DeviceMessage
